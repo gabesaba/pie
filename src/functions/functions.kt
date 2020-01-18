@@ -1,5 +1,6 @@
 package functions
 
+import types.Bool
 import types.Fn
 import types.Pair
 import types.Type
@@ -31,6 +32,14 @@ val cdr = Fn {
     }
 }
 
+val eq = Fn {
+    it.assertSize(2, "eq?")
+    if (it[0] == it[1]) {
+        Bool.True
+    } else {
+        Bool.False
+    }
+}
 
 private fun List<Type>.assertSize(expectedSize: Int, funName: String) {
     if (this.size != expectedSize) {

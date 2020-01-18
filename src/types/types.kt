@@ -24,4 +24,14 @@ data class Pair(val engine: Type, val caboose: Type): Type() {
     override fun toString() = "($engine . $caboose)"
 }
 
+sealed class Bool: Type() {
+    object True: Bool() {
+        override fun toString() = "#t"
+    }
+
+    object False: Bool() {
+        override fun toString() = "#f"
+    }
+}
+
 class Fn(val f: (List<Type>) -> Type): Type()

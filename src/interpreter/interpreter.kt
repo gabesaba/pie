@@ -3,6 +3,7 @@ package interpreter
 import functions.car
 import functions.cdr
 import functions.cons
+import functions.eq
 import syntax.Expression
 import syntax.buildSyntaxTree
 import syntax.tokenize
@@ -14,7 +15,8 @@ class Interpreter() {
     var env = mutableMapOf(
         "cons" to cons,
         "car" to car,
-        "cdr" to cdr
+        "cdr" to cdr,
+        "eq?" to eq
     )
 
     fun parseAndEval(inp: String): String{

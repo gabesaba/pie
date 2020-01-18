@@ -9,6 +9,7 @@ import syntax.buildSyntaxTree
 import syntax.tokenize
 import types.Atom
 import types.Fn
+import types.Nat
 import types.Type
 
 class Interpreter() {
@@ -25,6 +26,7 @@ class Interpreter() {
         return eval(tree).toString()
     }
 
+    @kotlin.ExperimentalUnsignedTypes
     private fun eval(exp: Expression): Type {
         when (exp) {
             is Expression.S -> {
@@ -43,6 +45,7 @@ class Interpreter() {
             is Expression.Leaf -> {
                 return when {
                     Atom.isAtom(exp.identifier) -> Atom(exp.identifier)
+                    exp.identifier.toUIntOrNull() != null -> Nat(exp.identifier.toUInt())
                     env.containsKey(exp.identifier.toLowerCase()) -> env[exp.identifier.toLowerCase()]!!
                     else -> error("Error: ${exp.identifier} is not in scope")
                 }

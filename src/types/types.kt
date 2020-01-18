@@ -20,6 +20,11 @@ data class Atom(val s: String): Type() {
     }
 }
 
+@kotlin.ExperimentalUnsignedTypes
+data class Nat(val n: UInt): Type() {
+    override fun toString() = n.toString()
+}
+
 data class Pair(val engine: Type, val caboose: Type): Type() {
     override fun toString() = "($engine . $caboose)"
 }

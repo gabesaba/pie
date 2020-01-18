@@ -1,5 +1,6 @@
 package interpreter
 
+import functions.add
 import functions.car
 import functions.cdr
 import functions.cons
@@ -12,11 +13,13 @@ import types.Fn
 import types.Nat
 import types.Type
 
+@kotlin.ExperimentalUnsignedTypes
 class Interpreter() {
     var env = mutableMapOf(
         "cons" to cons,
         "car" to car,
         "cdr" to cdr,
+        "+" to add,
         "eq?" to eq
     )
 
@@ -26,7 +29,6 @@ class Interpreter() {
         return eval(tree).toString()
     }
 
-    @kotlin.ExperimentalUnsignedTypes
     private fun eval(exp: Expression): Type {
         when (exp) {
             is Expression.S -> {

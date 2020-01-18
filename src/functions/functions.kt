@@ -2,6 +2,7 @@ package functions
 
 import types.Bool
 import types.Fn
+import types.Nat
 import types.Pair
 import types.Type
 
@@ -39,6 +40,19 @@ val eq = Fn {
     } else {
         Bool.False
     }
+}
+
+@kotlin.ExperimentalUnsignedTypes
+val add = Fn {
+    var out: UInt = 0u
+    for (t in it) {
+        if (t is Nat) {
+            out += t.n
+        } else {
+            error("Invalid type ${t::class} encountered when adding")
+        }
+    }
+    Nat(out)
 }
 
 private fun List<Type>.assertSize(expectedSize: Int, funName: String) {
